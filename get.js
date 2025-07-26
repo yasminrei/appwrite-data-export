@@ -1,24 +1,24 @@
 const fs = require('fs');
-const { databases } = require('./app.js');
-const { inputCollectionId, inputDatabaseId } = require('./get.input.js');
-
-const keys = require('./get.input.js').keys;
+const { getDatabases } = require('./app.js');
+const { getInputCollectionId, getInputDatabaseId, attributes } = require('./get.input.js');
 
 async function getDocuments() {
-    const documents = await databases.listDocuments(
-        inputDatabaseId,
-        inputCollectionId,
+    const documents = await getDatabases.listDocuments(
+        getInputDatabaseId,
+        getInputCollectionId,
     )
 
     console.log(documents)
 
     // Go through each document
-    // Go through each key and push to each document
+    // Go through each attribute and push to each document
     const result = documents.documents.map(document => {
         const newDocument = {};
-        keys.forEach(key => {
-            if (document[key]) {
-                newDocument[key] = document[key];
+        attributes.forEach(attribute => {
+            if (document[attribute]) {
+                newDocument[attribute] = document[attribute];
+            } else {
+                newDocument[attribute] = null;
             }
         });
         return newDocument;
