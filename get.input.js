@@ -1,9 +1,9 @@
-const { collections, databaseId, } = require('./config.js');
+const { getCollections, getDatabaseId, } = require('./config.js');
 
 // Enter the database ID and collection ID you want to export
-const inputDatabaseId = databaseId 
-const inputCollectionId = collections.appNamesId
-const keys = ["title", "body"]
+const getInputDatabaseId = getDatabaseId 
+const getInputCollectionId = getCollections.appNamesId
+const attributes = ["title", "body"]
 
 /**
  * In the terminal
@@ -16,7 +16,7 @@ const keys = ["title", "body"]
  */
 
 module.exports = {
-    inputDatabaseId,
-    inputCollectionId,
-    keys
+    getInputDatabaseId,
+    getInputCollectionId,
+    attributes
 };
