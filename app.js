@@ -1,17 +1,24 @@
 const sdk = require("node-appwrite");
-const { apiKey, projectId, endpoint } = require("./config");
+const { getApiKey, getProjectId, endpoint, pushApiKey, pushProjectId } = require('./config.js');
 
-const client = new sdk.Client();
-
-client
-    .setEndpoint(endpoint) // Your API Endpoint
-    .setProject(projectId) // Your project ID
-    .setKey(apiKey) // Your secret API key
+const getClient = new sdk.Client();
+getClient
+    .setEndpoint(endpoint)
+    .setProject(getProjectId)
+    .setKey(getApiKey)
 ;
+const getDatabases = new sdk.Databases(getClient);
 
-const databases = new sdk.Databases(client);
+const pushClient = new sdk.Client();
+pushClient
+    .setEndpoint(endpoint)
+    .setProject(pushProjectId)
+    .setKey(pushApiKey)
+const pushDatabases = new sdk.Databases(pushClient);
 
 module.exports = {
-    client,
-    databases,
+    getClient,
+    getDatabases,
+    pushClient,
+    pushDatabases
 }
